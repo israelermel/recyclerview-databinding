@@ -1,10 +1,11 @@
-package com.example.myapplication.recyclerview
+package com.example.myapplication.recyclerview.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.recyclerview.BaseViewHolderRD
 
 abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
 
@@ -16,7 +17,7 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding =
             DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
-        return BaseViewHolderRD<T>(binding)
+        return BaseViewHolderRD(binding)
     }
 
     override fun onBindViewHolder(holder: BaseViewHolderRD<T>, position: Int) {

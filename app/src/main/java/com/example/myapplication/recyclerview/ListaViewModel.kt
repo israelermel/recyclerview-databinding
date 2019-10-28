@@ -1,22 +1,22 @@
 package com.example.myapplication.recyclerview
 
-import com.example.myapplication.R
+import com.example.myapplication.recyclerview.base.ComponentType
 
 class ListaViewModel {
 
-    var testeAdapter: TesteAdapterRD<ObjTeste>
+    var editTextAdapter: MultLayoutAdapterRD<RowRecyclerView>
 
     init {
 
-        val lista = mutableListOf<ObjTeste>()
-        lista.add(ObjTeste("israel1"))
-        lista.add(ObjTeste("israel2"))
-        lista.add(ObjTeste("israel3"))
-        lista.add(ObjTeste("israel4"))
-        lista.add(ObjTeste("israel5"))
-        lista.add(ObjTeste("israel6"))
+        val lista = mutableListOf<RowRecyclerView>()
+        lista.add(RowRecyclerView("israel1", ComponentType.EditText))
+        lista.add(RowRecyclerView("israel2", ComponentType.EditText))
+        lista.add(RowRecyclerView("israel3", ComponentType.EditText))
+        lista.add(RowRecyclerView("israel4", ComponentType.TextView))
+        lista.add(RowRecyclerView("israel5", ComponentType.TextView))
+        lista.add(RowRecyclerView("israel6", ComponentType.TextView))
+        lista.add(RowRecyclerView("israel7", ComponentType.TextView))
 
-        testeAdapter = TesteAdapterRD(R.layout.edittext_layout, lista)
-
+        editTextAdapter = MultLayoutAdapterRD(lista)
     }
 }
