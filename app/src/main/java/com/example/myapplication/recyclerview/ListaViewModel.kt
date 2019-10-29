@@ -1,10 +1,12 @@
 package com.example.myapplication.recyclerview
 
+import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.recyclerview.base.ComponentType
 
 class ListaViewModel {
 
     var editTextAdapter: MultLayoutAdapterRD<RowRecyclerView>
+    var openDialog = MutableLiveData<String>()
 
     init {
 
@@ -18,5 +20,9 @@ class ListaViewModel {
         lista.add(RowRecyclerView("israel7", ComponentType.TextView))
 
         editTextAdapter = MultLayoutAdapterRD(lista)
+    }
+
+    fun open() {
+        openDialog.postValue("teste")
     }
 }
