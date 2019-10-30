@@ -3,7 +3,7 @@ package com.example.myapplication.recyclerview
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.BR
-import com.example.myapplication.recyclerview.base.OnItemClickBottomSheet
+import com.example.myapplication.recyclerview.base.OnItemClickRownRecyclerView
 
 class BaseViewHolderRD<T>(private val binding: ViewDataBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -13,7 +13,7 @@ class BaseViewHolderRD<T>(private val binding: ViewDataBinding) :
         binding.executePendingBindings()
     }
 
-    fun bind(obj: T, listener: OnItemClickBottomSheet) {
+    fun bind(obj: T, listener: OnItemClickRownRecyclerView<T>) {
         binding.setVariable(BR.obj, obj)
         binding.setVariable(BR.listener, listener)
         binding.executePendingBindings()

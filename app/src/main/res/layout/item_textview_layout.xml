@@ -5,11 +5,12 @@
 
         <variable
             name="listener"
-            type="com.example.myapplication.recyclerview.base.OnItemClickBottomSheet" />
+            type="com.example.myapplication.recyclerview.base.OnItemClickRownRecyclerView" />
 
         <variable
             name="obj"
             type="com.example.myapplication.recyclerview.RowRecyclerView" />
+
     </data>
 
     <LinearLayout

@@ -2,7 +2,7 @@ package com.example.myapplication.recyclerview
 
 import com.example.myapplication.recyclerview.base.OnItemClickRownRecyclerView
 
-class SingleAdapterRD<T>(
+class SingleItemAdapterRD<T>(
     layoutId: Int,
     private val mLista: List<T>,
     private val listener: OnItemClickRownRecyclerView

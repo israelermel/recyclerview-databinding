@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.myapplication.components.BottomSheetRD
 import com.example.myapplication.components.OnClickBottomSheetRD
-import com.example.myapplication.databinding.CreateBinding
 import com.example.myapplication.recyclerview.ListaViewModel
 import com.example.myapplication.recyclerview.RowRecyclerView
 import com.example.myapplication.recyclerview.base.ComponentType
+import com.example.myapplication.recyclerview.base.OnItemClickRownRecyclerView
 import kotlinx.android.synthetic.main.lista.*
 
 class MainActivity : AppCompatActivity() {
@@ -53,18 +53,26 @@ class MainActivity : AppCompatActivity() {
             lista.add(RowRecyclerView("israel7", ComponentType.TextView))
 
             btn_open_dialog.setOnClickListener {
-                val bottomSheetRD = BottomSheetRD(this, onClickBottomSheet())
+                val bottomSheetRD = BottomSheetRD(this, onItemClickBottomSheet())
                 bottomSheetRD.setTitle("Titulo para Teste")
                 bottomSheetRD.setRecyclerViewList(lista)
                 bottomSheetRD.show()
             }
-            
+
         } catch (ex: Exception) {
             Log.e("israel", ex.message)
         }
 
-
     }
+
+    private fun onItemClickBottomSheet(): OnItemClickRownRecyclerView {
+        return object : OnItemClickRownRecyclerView {
+            override fun onSelected(item: RowRecyclerView) {
+                Log.d("israel", item.nome)
+            }
+        }
+    }
+
 
     private fun onClickBottomSheet(): OnClickBottomSheetRD {
         return object : OnClickBottomSheetRD {

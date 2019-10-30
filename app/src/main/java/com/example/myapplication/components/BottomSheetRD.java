@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.recyclerview.SingleAdapterRD;
-import com.example.myapplication.recyclerview.base.OnItemClickBottomSheet;
+import com.example.myapplication.recyclerview.base.OnItemClickRownRecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
@@ -21,14 +21,14 @@ public class BottomSheetRD extends BottomSheetDialog {
     private TextView titleView;
     private RecyclerView recyclerView;
 
-    private OnItemClickBottomSheet onItemClickBottomSheet;
+    private OnItemClickRownRecyclerView onItemClickBottomSheet;
 
     public BottomSheetRD(@NonNull Context context) {
         super(context, R.style.BottomSheetDialogTheme);
         setDialogView();
     }
 
-    public BottomSheetRD(@NonNull Context context, OnItemClickBottomSheet onItemClickBottomSheet) {
+    public BottomSheetRD(@NonNull Context context, OnItemClickRownRecyclerView onItemClickBottomSheet) {
         super(context, R.style.BottomSheetDialogTheme);
         this.onItemClickBottomSheet = onItemClickBottomSheet;
         setDialogView();

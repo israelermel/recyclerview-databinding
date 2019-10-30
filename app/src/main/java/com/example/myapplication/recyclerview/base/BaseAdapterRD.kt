@@ -37,7 +37,7 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
 
     protected abstract fun getLayoutIdForPosition(position: Int): Int
 
-    open fun listener(): OnItemClickBottomSheet? {
+    open fun listener(): OnItemClickRownRecyclerView? {
         return null
     }
 }
