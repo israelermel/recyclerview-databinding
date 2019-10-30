@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
+        <variable
+            name="listener"
+            type="com.example.myapplication.recyclerview.OnItemClick&lt;com.example.myapplication.recyclerview.RowRecyclerView&gt;" />
+
         <variable
             name="obj"
             type="com.example.myapplication.recyclerview.RowRecyclerView" />
@@ -12,6 +17,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="@{() -> listener.onSelectedItem(obj)}"
         android:orientation="vertical">
 
         <TextView

@@ -1,13 +1,18 @@
 package com.example.myapplication.recyclerview
 
-import com.example.myapplication.recyclerview.base.OnItemClickRownRecyclerView
-
-class SingleItemAdapterRD<T>(
+class SingleAdapterListenerRD<T>(
     layoutId: Int,
     private val mLista: List<T>,
-    private val listener: OnItemClickRownRecyclerView
+    private val listener: OnItemClick<T>?
 ) :
     SingleLayoutAdapter<T>(layoutId) {
+
+    override fun onSelectedItem(item: T): OnItemClick<T>? {
+        listener?.let {
+            return listener.onSelectedItem(item)
+        }
+        return null
+    }
 
     override fun getObjForPosition(position: Int): T {
         return mLista[position]

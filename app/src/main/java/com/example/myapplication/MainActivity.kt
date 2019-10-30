@@ -6,10 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.myapplication.components.BottomSheetRD
 import com.example.myapplication.components.OnClickBottomSheetRD
+import com.example.myapplication.databinding.CreateBinding
 import com.example.myapplication.recyclerview.ListaViewModel
+import com.example.myapplication.recyclerview.OnItemClick
 import com.example.myapplication.recyclerview.RowRecyclerView
 import com.example.myapplication.recyclerview.base.ComponentType
-import com.example.myapplication.recyclerview.base.OnItemClickRownRecyclerView
 import kotlinx.android.synthetic.main.lista.*
 
 class MainActivity : AppCompatActivity() {
@@ -53,22 +54,23 @@ class MainActivity : AppCompatActivity() {
             lista.add(RowRecyclerView("israel7", ComponentType.TextView))
 
             btn_open_dialog.setOnClickListener {
-                val bottomSheetRD = BottomSheetRD(this, onItemClickBottomSheet())
+                val bottomSheetRD = BottomSheetRD<RowRecyclerView>(this, onItemClickBottomSheet())
                 bottomSheetRD.setTitle("Titulo para Teste")
                 bottomSheetRD.setRecyclerViewList(lista)
                 bottomSheetRD.show()
             }
 
         } catch (ex: Exception) {
-            Log.e("israel", ex.message)
+//            Log.e("israel", ex.message)
         }
 
     }
 
-    private fun onItemClickBottomSheet(): OnItemClickRownRecyclerView {
-        return object : OnItemClickRownRecyclerView {
-            override fun onSelected(item: RowRecyclerView) {
+    private fun onItemClickBottomSheet(): OnItemClick<RowRecyclerView> {
+        return object : OnItemClick<RowRecyclerView> {
+            override fun onSelectedItem(item: RowRecyclerView): OnItemClick<RowRecyclerView>? {
                 Log.d("israel", item.nome)
+                return this
             }
         }
     }

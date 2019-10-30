@@ -6,8 +6,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.recyclerview.BaseViewHolderRD
+import com.example.myapplication.recyclerview.OnItemClick
 
-abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
+abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>(), OnItemClick<T> {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -23,10 +24,9 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
 
     override fun onBindViewHolder(holder: BaseViewHolderRD<T>, position: Int) {
         val obj = getObjForPosition(position)
-//        listener()?.let { listener ->
-//            holder.bind(obj, listener)
-//        } ?:
-        holder.bind(obj)
+        onSelectedItem(obj)?.let {
+            holder.bind(obj, it)
+        } ?: holder.bind(obj)
 
     }
 
@@ -38,7 +38,9 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
 
     protected abstract fun getLayoutIdForPosition(position: Int): Int
 
-//    open fun listener(): OnItemClickBottomSheet? {
-//        return null
-//    }
+    override fun onSelectedItem(item: T): OnItemClick<T>? {
+        return null
+    }
+
+
 }
