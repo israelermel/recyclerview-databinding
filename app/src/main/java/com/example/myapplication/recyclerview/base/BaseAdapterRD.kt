@@ -17,12 +17,16 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding =
             DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
+
         return BaseViewHolderRD(binding)
     }
 
     override fun onBindViewHolder(holder: BaseViewHolderRD<T>, position: Int) {
         val obj = getObjForPosition(position)
-        holder.bind(obj)
+        listener()?.let { listener ->
+            holder.bind(obj, listener)
+        } ?: holder.bind(obj)
+
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -32,4 +36,8 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
     protected abstract fun getObjForPosition(position: Int): T
 
     protected abstract fun getLayoutIdForPosition(position: Int): Int
+
+    open fun listener(): OnItemClickBottomSheet? {
+        return null
+    }
 }

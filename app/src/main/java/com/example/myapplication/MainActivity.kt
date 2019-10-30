@@ -8,6 +8,8 @@ import com.example.myapplication.components.BottomSheetRD
 import com.example.myapplication.components.OnClickBottomSheetRD
 import com.example.myapplication.databinding.CreateBinding
 import com.example.myapplication.recyclerview.ListaViewModel
+import com.example.myapplication.recyclerview.RowRecyclerView
+import com.example.myapplication.recyclerview.base.ComponentType
 import kotlinx.android.synthetic.main.lista.*
 
 class MainActivity : AppCompatActivity() {
@@ -40,10 +42,23 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         try {
+
+            val lista = mutableListOf<RowRecyclerView>()
+            lista.add(RowRecyclerView("israel1", ComponentType.EditText))
+            lista.add(RowRecyclerView("israel2", ComponentType.EditText))
+            lista.add(RowRecyclerView("israel3", ComponentType.EditText))
+            lista.add(RowRecyclerView("israel4", ComponentType.TextView))
+            lista.add(RowRecyclerView("israel5", ComponentType.TextView))
+            lista.add(RowRecyclerView("israel6", ComponentType.TextView))
+            lista.add(RowRecyclerView("israel7", ComponentType.TextView))
+
             btn_open_dialog.setOnClickListener {
                 val bottomSheetRD = BottomSheetRD(this, onClickBottomSheet())
+                bottomSheetRD.setTitle("Titulo para Teste")
+                bottomSheetRD.setRecyclerViewList(lista)
                 bottomSheetRD.show()
             }
+            
         } catch (ex: Exception) {
             Log.e("israel", ex.message)
         }
