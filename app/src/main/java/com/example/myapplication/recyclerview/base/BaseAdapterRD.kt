@@ -23,9 +23,10 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
 
     override fun onBindViewHolder(holder: BaseViewHolderRD<T>, position: Int) {
         val obj = getObjForPosition(position)
-        listener()?.let { listener ->
-            holder.bind(obj, listener)
-        } ?: holder.bind(obj)
+//        listener()?.let { listener ->
+//            holder.bind(obj, listener)
+//        } ?:
+        holder.bind(obj)
 
     }
 
@@ -37,7 +38,7 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
 
     protected abstract fun getLayoutIdForPosition(position: Int): Int
 
-    open fun listener(): OnItemClickBottomSheet? {
-        return null
-    }
+//    open fun listener(): OnItemClickBottomSheet? {
+//        return null
+//    }
 }
