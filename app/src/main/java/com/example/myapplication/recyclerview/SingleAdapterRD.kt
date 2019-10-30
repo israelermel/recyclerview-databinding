@@ -1,11 +1,8 @@
 package com.example.myapplication.recyclerview
 
-import com.example.myapplication.recyclerview.base.OnItemClickRownRecyclerView
-
 class SingleAdapterRD<T>(
     layoutId: Int,
-    private val mLista: List<T>,
-    private val listener: OnItemClickRownRecyclerView
+    private val mLista: List<T>
 ) :
     SingleLayoutAdapter<T>(layoutId) {
 
@@ -17,7 +14,7 @@ class SingleAdapterRD<T>(
         return mLista.size
     }
 
-    override fun listener(): OnItemClickRownRecyclerView? {
+    /*override fun listener(): OnItemClickBottomSheet? {
         return listener
-    }
+    }*/
 }

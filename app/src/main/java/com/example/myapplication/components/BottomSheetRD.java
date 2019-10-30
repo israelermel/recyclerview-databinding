@@ -3,6 +3,7 @@ package com.example.myapplication.components;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
 
-public class BottomSheetRD extends BottomSheetDialog {
+public class BottomSheetRD extends BottomSheetDialog implements View.OnClickListener {
 
     private OnClickBottomSheetRD onClickBottomSheetRD;
     private TextView titleView;
@@ -46,9 +47,11 @@ public class BottomSheetRD extends BottomSheetDialog {
 
         Button btnEntrar = findViewById(R.id.btn_entrar);
         Button btnSair = findViewById(R.id.btn_sair);
+        ImageButton btnClose = findViewById(R.id.btn_close_bottom_sheet_rd);
 
         titleView = findViewById(R.id.txt_title_bottom_sheet);
         recyclerView = findViewById(R.id.rcv_bottom_sheet_custom);
+        btnClose.setOnClickListener(this);
 
         if (onClickBottomSheetRD != null) {
             btnEntrar.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +69,7 @@ public class BottomSheetRD extends BottomSheetDialog {
             });
         }
 
+
     }
 
 
@@ -74,8 +78,13 @@ public class BottomSheetRD extends BottomSheetDialog {
     }
 
     public <T> void setRecyclerViewList(List<T> list) {
-        SingleAdapterRD singleAdapterRD = new SingleAdapterRD(R.layout.item_textview_layout, list, onItemClickBottomSheet);
+//        SingleAdapterRD singleAdapterRD = new SingleAdapterRD(R.layout.item_textview_layout, list, onItemClickBottomSheet);
+        SingleAdapterRD singleAdapterRD = new SingleAdapterRD(R.layout.item_textview_layout, list);
         recyclerView.setAdapter(singleAdapterRD);
     }
 
+    @Override
+    public void onClick(View v) {
+        dismiss();
+    }
 }
