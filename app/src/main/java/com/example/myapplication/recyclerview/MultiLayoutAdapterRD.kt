@@ -3,7 +3,7 @@ package com.example.myapplication.recyclerview
 import com.example.myapplication.recyclerview.base.BaseAdapterRD
 import com.example.myapplication.recyclerview.base.ComponentTypeImpl
 
-class MultLayoutAdapterRD<T>(private val lista: MutableList<T>) : BaseAdapterRD<T>() {
+class MultiLayoutAdapterRD<T>(private val lista: MutableList<T>) : BaseAdapterRD<T>() {
 
     var componentTypeImpl: ComponentTypeImpl = ComponentTypeImpl()
 
