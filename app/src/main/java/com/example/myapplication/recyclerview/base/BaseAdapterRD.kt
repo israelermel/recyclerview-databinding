@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.BR
 import com.example.myapplication.recyclerview.BaseViewHolderRD
 
 abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>(), BindExtraItem {
@@ -26,8 +27,8 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>(), B
         val obj = getObjForPosition(position)
 
         extraBindings()?.let {
-            holder.bind(obj, it)
-        } ?: holder.bind(obj)
+            holder.bind(obj, it, variableIdObject())
+        } ?: holder.bind(obj, variableIdObject())
 
     }
 
@@ -41,6 +42,10 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>(), B
 
     override fun extraBindings(): SparseArray<Any>? {
         return null
+    }
+
+    override fun variableIdObject(): Int {
+        return BR.obj
     }
 
 }

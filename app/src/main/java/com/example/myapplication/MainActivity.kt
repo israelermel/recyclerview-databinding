@@ -25,11 +25,6 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = ListaViewModel()
         binding.executePendingBindings()
 
-
-
-        exemploEnum()
-
-
 //        exemplo()
 
         try {
@@ -53,14 +48,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun exemploEnum() {
-
-    }
-
     private fun openBottomSheet(lista: MutableList<RowRecyclerView>) {
         bottomSheet = BottomSheetRecyclerView.Builder<RowRecyclerView>(this)
             .addTitle("Bottom Sheet Test")
-            .addList(lista)
+            .addList(lista, BR.customer)
             .addExtraBinding(BR.listener, onItemClick())
             .build()
 

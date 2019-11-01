@@ -5,7 +5,8 @@ import android.util.SparseArray
 class SingleAdapterListenerRD<T>(
     layoutId: Int,
     private val mLista: List<T>,
-    private val extraBinding: SparseArray<Any>?
+    private val extraBinding: SparseArray<Any>?,
+    private var variableId: Int? = null
 ) :
     SingleLayoutAdapter<T>(layoutId) {
 
@@ -19,6 +20,10 @@ class SingleAdapterListenerRD<T>(
 
     override fun extraBindings(): SparseArray<Any>? {
         return extraBinding
+    }
+
+    override fun variableIdObject(): Int {
+        return variableId?.let { variableId } ?: super.variableIdObject()
     }
 
 }

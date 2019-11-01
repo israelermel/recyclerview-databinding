@@ -8,7 +8,7 @@
             type="com.example.myapplication.recyclerview.OnItemClick&lt;com.example.myapplication.recyclerview.RowRecyclerView&gt;" />
 
         <variable
-            name="obj"
+            name="customer"
             type="com.example.myapplication.recyclerview.RowRecyclerView" />
     </data>
 
@@ -17,14 +17,14 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="@{() -> listener.onSelectedItem(obj)}"
+        android:onClick="@{() -> listener.onSelectedItem(customer)}"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:duplicateParentState="false"
-            android:text="@{obj.nome}" />
+            android:text="@{customer.nome}" />
 
     </LinearLayout>
 </layout>
