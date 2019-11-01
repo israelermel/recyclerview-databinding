@@ -1,5 +1,5 @@
 package com.example.myapplication.recyclerview
 
-import com.example.myapplication.recyclerview.base.ComponentType
+import com.example.myapplication.enumteste.ComponentLayoutEnum
 
-data class RowRecyclerView(var nome: String, var componentType: ComponentType)
+data class RowRecyclerView(var nome: String, var componentType: ComponentLayoutEnum)

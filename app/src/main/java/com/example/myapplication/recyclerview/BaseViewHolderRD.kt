@@ -15,12 +15,6 @@ class BaseViewHolderRD<T>(private val binding: ViewDataBinding) :
         binding.executePendingBindings()
     }
 
-//    fun bind(obj: T, listener: OnItemClick<T>) {
-//        binding.setVariable(BR.obj, obj)
-//        binding.setVariable(BR.listener, listener)
-//        binding.executePendingBindings()
-//    }
-
     fun bind(obj: T, extraBindings: SparseArray<Any>) {
         var i = 0
         val size = extraBindings.size()

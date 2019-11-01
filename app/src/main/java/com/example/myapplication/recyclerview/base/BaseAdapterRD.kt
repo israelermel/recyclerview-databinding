@@ -8,7 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.recyclerview.BaseViewHolderRD
 
-abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
+abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>(), BindExtraItem {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -39,6 +39,8 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
 
     protected abstract fun getLayoutIdForPosition(position: Int): Int
 
-    protected abstract fun extraBindings(): SparseArray<Any>?
+    override fun extraBindings(): SparseArray<Any>? {
+        return null
+    }
 
 }

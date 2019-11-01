@@ -7,4 +7,5 @@ abstract class SingleLayoutAdapter<T>(private val layoutId: Int) : BaseAdapterRD
     override fun getLayoutIdForPosition(position: Int): Int {
         return layoutId
     }
+
 }
