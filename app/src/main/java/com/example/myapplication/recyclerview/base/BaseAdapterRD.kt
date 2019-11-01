@@ -1,14 +1,14 @@
 package com.example.myapplication.recyclerview.base
 
+import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.recyclerview.BaseViewHolderRD
-import com.example.myapplication.recyclerview.OnItemClick
 
-abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>(), OnItemClick<T> {
+abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -24,7 +24,8 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>(), O
 
     override fun onBindViewHolder(holder: BaseViewHolderRD<T>, position: Int) {
         val obj = getObjForPosition(position)
-        onSelectedItem(obj)?.let {
+
+        extraBindings()?.let {
             holder.bind(obj, it)
         } ?: holder.bind(obj)
 
@@ -38,9 +39,6 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>(), O
 
     protected abstract fun getLayoutIdForPosition(position: Int): Int
 
-    override fun onSelectedItem(item: T): OnItemClick<T>? {
-        return null
-    }
-
+    protected abstract fun extraBindings(): SparseArray<Any>?
 
 }

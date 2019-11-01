@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.myapplication.components.BottomSheetRD
+import com.example.myapplication.components.BottomSheetRecyclerView
 import com.example.myapplication.databinding.CreateBinding
 import com.example.myapplication.recyclerview.ListaViewModel
 import com.example.myapplication.recyclerview.OnItemClick
@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.lista.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var bottomSheet: BottomSheetRecyclerView<RowRecyclerView>
     lateinit var binding: CreateBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,10 +39,7 @@ class MainActivity : AppCompatActivity() {
             lista.add(RowRecyclerView("israel7", ComponentType.TextView))
 
             btn_open_dialog.setOnClickListener {
-                val bottomSheetRD = BottomSheetRD(this, onItemClickBottomSheet())
-                bottomSheetRD.setTitle("Titulo para Teste")
-                bottomSheetRD.setRecyclerViewList(lista)
-                bottomSheetRD.show()
+                openBottomSheet(lista)
             }
 
         } catch (ex: Exception) {
@@ -50,19 +48,30 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun openBottomSheet(lista: MutableList<RowRecyclerView>) {
+        bottomSheet = BottomSheetRecyclerView.Builder<RowRecyclerView>(this)
+            .addTitle("Bottom Sheet Test")
+            .addList(lista)
+            .addLayoutId(R.layout.item_textview_layout)
+            .addExtraBinding(BR.listener, onItemClick())
+            .build()
+
+        bottomSheet.show()
+    }
+
+    private fun onItemClick(): OnItemClick<RowRecyclerView> {
+        return object : OnItemClick<RowRecyclerView> {
+            override fun onSelectedItem(item: RowRecyclerView) {
+                bottomSheet.dismiss()
+                Log.d("israel", "selecionado - ${item.nome}")
+            }
+        }
+    }
+
     fun exemplo() {
         val me = person("fisica") {
             name = "israel"
             age = 33
-        }
-    }
-
-    private fun onItemClickBottomSheet(): OnItemClick<RowRecyclerView> {
-        return object : OnItemClick<RowRecyclerView> {
-            override fun onSelectedItem(item: RowRecyclerView): OnItemClick<RowRecyclerView>? {
-                Log.d("israel", item.nome)
-                return this
-            }
         }
     }
 

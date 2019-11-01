@@ -1,18 +1,13 @@
 package com.example.myapplication.recyclerview
 
+import android.util.SparseArray
+
 class SingleAdapterListenerRD<T>(
     layoutId: Int,
     private val mLista: List<T>,
-    private val listener: OnItemClick<T>?
+    private val extraBinding: SparseArray<Any>?
 ) :
     SingleLayoutAdapter<T>(layoutId) {
-
-    override fun onSelectedItem(item: T): OnItemClick<T>? {
-        listener?.let {
-            return listener.onSelectedItem(item)
-        }
-        return null
-    }
 
     override fun getObjForPosition(position: Int): T {
         return mLista[position]
@@ -20,6 +15,10 @@ class SingleAdapterListenerRD<T>(
 
     override fun getItemCount(): Int {
         return mLista.size
+    }
+
+    override fun extraBindings(): SparseArray<Any>? {
+        return extraBinding
     }
 
 }

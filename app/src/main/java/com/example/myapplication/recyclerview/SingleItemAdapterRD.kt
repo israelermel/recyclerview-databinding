@@ -1,13 +1,16 @@
 package com.example.myapplication.recyclerview
 
-import com.example.myapplication.recyclerview.base.OnItemClickRownRecyclerView
+import android.util.SparseArray
 
 class SingleItemAdapterRD<T>(
     layoutId: Int,
-    private val mLista: List<T>,
-    private val listener: OnItemClickRownRecyclerView
+    private val mLista: List<T>
 ) :
     SingleLayoutAdapter<T>(layoutId) {
+
+    override fun extraBindings(): SparseArray<Any>? {
+        return null
+    }
 
     override fun getObjForPosition(position: Int): T {
         return mLista[position]
