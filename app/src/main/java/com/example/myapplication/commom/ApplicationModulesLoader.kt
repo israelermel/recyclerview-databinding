@@ -1,6 +1,7 @@
 package com.example.myapplication.commom
 
 import android.content.Context
+import com.example.myapplication.commom.mapper.ComponentConverter
 import com.example.myapplication.teste.NameViewModel
 import org.koin.android.ext.koin.with
 import org.koin.android.viewmodel.ext.koin.viewModel
@@ -44,7 +45,15 @@ class ApplicationModulesLoader {
 
 
     fun getModules2(): MutableList<Module> {
-        return arrayListOf(nameViewModel)
+        return arrayListOf(nameViewModel, componentConverter)
     }
+
+    private val componentConverter = module {
+        single {
+            ComponentConverter(get(), get())
+        }
+    }
+
+
 
 }
