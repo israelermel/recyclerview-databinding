@@ -4,5 +4,5 @@ import android.util.SparseArray
 
 interface BindExtraItem {
     fun extraBindings(): SparseArray<Any>?
-    fun variableIdObject(): Int
+    fun variableLayoutObject(): Int
 }

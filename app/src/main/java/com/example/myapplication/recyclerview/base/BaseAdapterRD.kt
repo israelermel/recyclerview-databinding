@@ -27,8 +27,8 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>(), B
         val obj = getObjForPosition(position)
 
         extraBindings()?.let {
-            holder.bind(obj, it, variableIdObject())
-        } ?: holder.bind(obj, variableIdObject())
+            holder.bind(obj, it, variableLayoutObject())
+        } ?: holder.bind(obj, variableLayoutObject())
 
     }
 
@@ -44,7 +44,7 @@ abstract class BaseAdapterRD<T> : RecyclerView.Adapter<BaseViewHolderRD<T>>(), B
         return null
     }
 
-    override fun variableIdObject(): Int {
+    override fun variableLayoutObject(): Int {
         return BR.obj
     }
 

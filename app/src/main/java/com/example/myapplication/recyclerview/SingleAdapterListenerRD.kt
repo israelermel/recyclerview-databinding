@@ -6,7 +6,7 @@ class SingleAdapterListenerRD<T>(
     layoutId: Int,
     private val mLista: List<T>,
     private val extraBinding: SparseArray<Any>?,
-    private var variableId: Int? = null
+    private var variableLayout: Int? = null
 ) :
     SingleLayoutAdapter<T>(layoutId) {
 
@@ -22,8 +22,8 @@ class SingleAdapterListenerRD<T>(
         return extraBinding
     }
 
-    override fun variableIdObject(): Int {
-        return variableId?.let { variableId } ?: super.variableIdObject()
+    override fun variableLayoutObject(): Int {
+        return variableLayout?.let { variableLayout } ?: super.variableLayoutObject()
     }
 
 }
