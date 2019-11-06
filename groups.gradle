@@ -1,0 +1,6 @@
+//def Group(Closure closure) {
+//    closure.delegate = dependencies
+//    return closure
+//}
+//
+//dependencies { apply from: "$rootProject.rootDir/groups.gradle" }

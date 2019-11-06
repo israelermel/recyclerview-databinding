@@ -13,12 +13,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class BottomSheetRecyclerView<T> : BottomSheetDialog, View.OnClickListener {
 
+    private lateinit var singleAdapterRD: SingleAdapterListenerRD<T>
+
     private var btnClose: ImageButton? = null
     private var titleView: TextView? = null
     private var recyclerView: RecyclerView? = null
     private var extraBindings: SparseArray<Any>? = null
-    private var layoutIdBottom: Int? = null
-    private var variableLayout: Int? = null
+    private var itemLayoutId: Int? = null
+    private var variableLayoutItem: Int? = null
 
     private constructor(
         context: Context,
@@ -31,15 +33,26 @@ class BottomSheetRecyclerView<T> : BottomSheetDialog, View.OnClickListener {
         context,
         R.style.BottomSheetDialogTheme
     ) {
-        addLayoutId(layoutId)
-
-        addVariableLayout(variableLayout)
-
-        setDialogView()
-
+        addItemLayoutId(layoutId)
+        addVariableLayoutItem(variableLayout)
+        configLayoutRecyclerView()
         addTitle(title)
         addExtraBind(extraBindings)
         setRecyclerViewList(listItem)
+    }
+
+    fun titleBottom(): String {
+        return titleView?.text.toString()
+    }
+
+    fun itemCount(): Int {
+        try {
+            recyclerView?.let {
+                return it.adapter!!.itemCount
+            } ?: return 0
+        } catch (e: KotlinNullPointerException) {
+            return 0
+        }
     }
 
     private fun addTitle(title: String?) {
@@ -47,10 +60,10 @@ class BottomSheetRecyclerView<T> : BottomSheetDialog, View.OnClickListener {
     }
 
     constructor(context: Context) : super(context, R.style.BottomSheetDialogTheme) {
-        setDialogView()
+        configLayoutRecyclerView()
     }
 
-    private fun setDialogView() {
+    private fun configLayoutRecyclerView() {
         val bottomSheetView = layoutInflater.inflate(R.layout.view_bottom_sheet, null)
         setContentView(bottomSheetView)
 
@@ -61,16 +74,28 @@ class BottomSheetRecyclerView<T> : BottomSheetDialog, View.OnClickListener {
         btnClose!!.setOnClickListener(this)
     }
 
-    private fun addVariableLayout(variableLayout: Int?) {
-        this.variableLayout = variableLayout
+    private fun addVariableLayoutItem(variableLayoutItem: Int?) {
+        this.variableLayoutItem = variableLayoutItem
     }
 
-    private fun addLayoutId(layoutId: Int? = null) {
+    fun variableLayoutItem(): Int? {
+        return variableLayoutItem
+    }
+
+    fun variableLayoutId(): Int {
+        return singleAdapterRD.variableLayoutObject()
+    }
+
+    private fun addItemLayoutId(layoutId: Int? = null) {
         if (layoutId == null) {
-            layoutIdBottom = R.layout.item_textview_layout
+            itemLayoutId = R.layout.item_textview_layout
         } else {
-            this.layoutIdBottom = layoutId
+            this.itemLayoutId = layoutId
         }
+    }
+
+    fun layoutIdBottomSheet(): Int? {
+        return itemLayoutId
     }
 
     private fun addExtraBind(extraBindings: SparseArray<Any>? = null) {
@@ -79,10 +104,14 @@ class BottomSheetRecyclerView<T> : BottomSheetDialog, View.OnClickListener {
         }
     }
 
+    fun extraBindItems(): SparseArray<Any>? {
+        return extraBindings
+    }
+
     private fun setRecyclerViewList(list: List<T>? = null) {
         list?.let {
-            val singleAdapterRD =
-                SingleAdapterListenerRD(layoutIdBottom!!, list, extraBindings, variableLayout)
+            singleAdapterRD =
+                SingleAdapterListenerRD(itemLayoutId!!, list, extraBindings, variableLayoutItem)
 
             recyclerView!!.adapter = singleAdapterRD
         }
@@ -92,29 +121,40 @@ class BottomSheetRecyclerView<T> : BottomSheetDialog, View.OnClickListener {
         dismiss()
     }
 
+    fun isShowingBottom(): Boolean {
+        return isShowing
+    }
+
     data class Builder<T>(
         private var context: Context,
         private var title: String? = null,
         private var layoutId: Int? = null,
         private var list: List<T>? = null,
         private var extraBindings: SparseArray<Any> = SparseArray(),
-        private var variableLayout: Int? = null
+        private var variableLayoutItem: Int? = null
     ) {
         fun addTitle(title: String) = apply { this.title = title }
 
         fun addLayoutId(layoutId: Int) = apply { this.layoutId = layoutId }
 
-        fun addList(list: List<T>, variableLayout: Int? = null) = apply {
+        fun addList(list: List<T>, variableLayoutItem: Int? = null) = apply {
             this.list = list
-            variableLayout?.let { this.variableLayout = it }
+            variableLayoutItem?.let { this.variableLayoutItem = it }
         }
 
-        fun addExtraBinding(variableId: Int, value: Any) = apply {
-            extraBindings.put(variableId, value)
+        fun addExtraBinding(variableExtraBind: Int, value: Any) = apply {
+            extraBindings.put(variableExtraBind, value)
         }
 
         fun build() =
-            BottomSheetRecyclerView(context, title, layoutId, list, extraBindings, variableLayout)
+            BottomSheetRecyclerView(
+                context,
+                title,
+                layoutId,
+                list,
+                extraBindings,
+                variableLayoutItem
+            )
 
     }
 }
