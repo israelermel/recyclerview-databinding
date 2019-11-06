@@ -5,21 +5,21 @@ import com.example.myapplication.components.BottomSheetRecyclerView
 import com.example.myapplication.enumteste.ComponentLayoutEnum
 import com.example.myapplication.recyclerview.OnItemClick
 import com.example.myapplication.recyclerview.RowRecyclerView
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertSame
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.standalone.StandAloneContext
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.spy
-import org.mockito.Spy
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
 
 @RunWith(RobolectricTestRunner::class)
 class BottomSheetRecyclerViewTest {
-
 
     private val variableExtraBind: Int = 2
     private val bottomSheetTitle = "Bottom Sheet Test"
@@ -29,9 +29,7 @@ class BottomSheetRecyclerViewTest {
     private lateinit var activityController: ActivityController<Activity>
     private lateinit var activity: Activity
 
-    @Spy
-    private lateinit var bottomSheetRecyclerView: BottomSheetRecyclerView<RowRecyclerView>
-
+    private lateinit var bottomSheetRecyclerViewBuilder: BottomSheetRecyclerView.Builder<RowRecyclerView>
 
     private var listener = mock(OnItemClick::class.java)
 
@@ -41,9 +39,14 @@ class BottomSheetRecyclerViewTest {
         activityController = Robolectric.buildActivity(Activity::class.java)
         activity = activityController.get()
 
-        bottomSheetRecyclerView = BottomSheetRecyclerView(activity)
+        bottomSheetRecyclerViewBuilder =
+            spy(BottomSheetRecyclerView.Builder<RowRecyclerView>(activity))
 
+    }
 
+    @After
+    fun tearDown() {
+        StandAloneContext.stopKoin()
     }
 
     private fun getAllItems(): MutableList<RowRecyclerView> {
@@ -63,8 +66,8 @@ class BottomSheetRecyclerViewTest {
     fun givenBottomTitle_shouldHasTitleOnComponent() {
         //GIVEN
 
-        bottomSheetRecyclerView = spy(
-            BottomSheetRecyclerView.Builder<RowRecyclerView>(activity)
+        var bottomSheetRecyclerView = spy(
+            bottomSheetRecyclerViewBuilder
                 .addTitle(bottomSheetTitle)
                 .build()
         )
@@ -80,8 +83,8 @@ class BottomSheetRecyclerViewTest {
     @Test
     fun givenTitleEmpty_shouldNotHasTitleOnComponent() {
         //GIVEN
-        bottomSheetRecyclerView = spy(
-            BottomSheetRecyclerView.Builder<RowRecyclerView>(activity)
+        var bottomSheetRecyclerView = spy(
+            bottomSheetRecyclerViewBuilder
                 .build()
         )
 
@@ -96,7 +99,7 @@ class BottomSheetRecyclerViewTest {
     @Test
     fun givenListItems_shouldHasSameCountOfItemsOnComponent() {
         //GIVEN
-        bottomSheetRecyclerView = spy(
+        var bottomSheetRecyclerView = spy(
             BottomSheetRecyclerView.Builder<RowRecyclerView>(activity)
                 .addTitle(bottomSheetTitle)
                 .addList(getAllItems())
@@ -114,7 +117,7 @@ class BottomSheetRecyclerViewTest {
     @Test
     fun givenListItemsEmpty_shouldHasEmptyListOnComponent() {
 
-        bottomSheetRecyclerView = spy(
+        var bottomSheetRecyclerView = spy(
             BottomSheetRecyclerView.Builder<RowRecyclerView>(activity)
                 .build()
         )
@@ -130,7 +133,7 @@ class BottomSheetRecyclerViewTest {
     @Test
     fun givenAnythingWithLayout_shouldHasReturnDefaultLayout() {
         //GIVEN
-        bottomSheetRecyclerView = spy(
+        var bottomSheetRecyclerView = spy(
             BottomSheetRecyclerView.Builder<RowRecyclerView>(activity)
                 .addTitle(bottomSheetTitle)
                 .addList(getAllItems())
@@ -147,7 +150,7 @@ class BottomSheetRecyclerViewTest {
     @Test
     fun givenNothingWithLayoutVariable_shouldHasReturnLayoutVariableDefault() {
         //GIVEN
-        bottomSheetRecyclerView = spy(
+        var bottomSheetRecyclerView = spy(
             BottomSheetRecyclerView.Builder<RowRecyclerView>(activity)
                 .addTitle(bottomSheetTitle)
                 .addList(getAllItems())
@@ -165,7 +168,7 @@ class BottomSheetRecyclerViewTest {
     @Test
     fun givenLayoutId_shouldHasReturnSameLayout() {
         //GIVEN
-        bottomSheetRecyclerView = spy(
+        var bottomSheetRecyclerView = spy(
             BottomSheetRecyclerView.Builder<RowRecyclerView>(activity)
                 .addLayoutId(BR.obj)
                 .addTitle(bottomSheetTitle)
@@ -183,7 +186,7 @@ class BottomSheetRecyclerViewTest {
     @Test
     fun givenVariableLayoutItem_shouldReturnSameLayoutItem() {
         //GIVEN
-        bottomSheetRecyclerView = spy(
+        var bottomSheetRecyclerView = spy(
             BottomSheetRecyclerView.Builder<RowRecyclerView>(activity)
                 .addLayoutId(BR.obj)
                 .addTitle(bottomSheetTitle)
@@ -198,7 +201,7 @@ class BottomSheetRecyclerViewTest {
     @Test
     fun givenVariableExtraBindListener_shouldReturnSameListener() {
         //GIVEN
-        bottomSheetRecyclerView = spy(
+        var bottomSheetRecyclerView = spy(
             BottomSheetRecyclerView.Builder<RowRecyclerView>(activity)
                 .addTitle(bottomSheetTitle)
                 .addList(getAllItems())
