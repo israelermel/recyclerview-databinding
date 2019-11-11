@@ -30,6 +30,10 @@ android {
         enabled = true
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
 //    testOptions {
 //        unitTests.returnDefaultValues = true
 //    }
