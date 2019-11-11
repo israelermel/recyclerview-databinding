@@ -4,6 +4,7 @@ import com.example.myapplication.extensions.CalculeDiscount
 import com.example.myapplication.extensions.Pessoa
 import com.example.myapplication.pattern.mediator.ChatMediator
 import com.example.myapplication.pattern.mediator.ChatUser
+import com.github.florent37.application.provider.ApplicationProvider
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -14,10 +15,14 @@ class MediatorTest {
 
     @Before
     fun setup() {
+
+        val applicationContext = ApplicationProvider.application.applicationContext
+
     }
 
     @Test
     fun test_mediator() {
+
         val mediator = ChatMediator()
         val israel = ChatUser(mediator, "Israel")
 
