@@ -1,2 +1,16 @@
 https://proandroiddev.com/clean-architecture-data-flow-dependency-rule-615ffdd79e29
 
+https://cobe.tech/blog/post/developing-android-apps-with-kotlin-and-clean-architecture
+
+https://rubygarage.org/blog/clean-android-architecture
+
+https://cobe.tech/blog/post/developing-android-apps-with-kotlin-and-clean-architecture
+
+https://apiumhub.com/tech-blog-barcelona/clean-architecture/
+
+https://articles.caster.io/?_ga=2.15818998.132958012.1573745477-264753462.1573745477
+
+https://caster.io/courses/android-clean-architecture
+
+
+https://proandroiddev.com/clean-architecture-data-flow-dependency-rule-615ffdd79e29
