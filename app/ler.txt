@@ -12,5 +12,37 @@ https://articles.caster.io/?_ga=2.15818998.132958012.1573745477-264753462.157374
 
 https://caster.io/courses/android-clean-architecture
 
+https://www.toptal.com/android/benefits-of-clean-architecture-android
+
 
 https://proandroiddev.com/clean-architecture-data-flow-dependency-rule-615ffdd79e29
+
+
+
+--- melhor artigos
+
+https://medium.com/@dmilicic/a-detailed-guide-on-developing-android-apps-using-the-clean-architecture-pattern-d38d71e94029
+
+https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
+
+https://vimeo.com/43612849
+
+
+
+
+
+
+
+* Classe abstrata para o UseCase, com parametro MutableLiveData
+* Interface UseCase, com 2 metodos para o multableLiveData e limpar os disposables
+* DisposableManager]
+
+
+UseCase implementa Sealed class , retornando os metodos deles
+
+interfaces Teste: UseCase<Teste.Result> {
+	sealed class Result {
+		usar “object” quando não tem parametros e
+		“data class” quando tem
+	}
+}
